@@ -1,0 +1,51 @@
+---
+title: Getting Started
+description: Astroの導入方法についてのドキュメントです。
+sidebar:
+    order: 1
+---
+
+import { Steps, Aside } from "@astrojs/starlight/components";
+
+AstroとStarlightテンプレートを使って、ドキュメント管理サイトを構築します。
+
+## プロジェクトの作成
+
+<Steps>
+
+1.  任意のディレクトリで以下のコマンドを実行します。
+
+    ```zsh
+    npm create astro@latest -- --template starlight
+    ```
+
+2.  `Where should we create your new project?` のメッセージが表示されるので、任意のプロジェクト名を入力します。
+
+    ```zsh
+    Where should we create your new project?
+    ./project-name
+    ```
+
+3.  `Install dependencies?`のメッセージが表示されるので、`Yes`を選択します。
+
+    <Aside title="このプロセスの意味">
+    	<p>これはAstroの依存関係モジュールをインストールするかを選択しています。</p>
+    	<p>
+    		<code dir="auto">Yes</code>を選択すると、プロジェクト作成と同時に依存関係がインストールされ、すぐにプロジェクトを起動できます。
+    	</p>
+    	<p>
+    		<code dir="auto">No</code>を選択した場合、プロジェクトディレクトリで<code dir="auto">npm install</code>を実行します。
+    	</p>
+    </Aside>
+
+4.  `Initialize a new git repository?`のメッセージが表示されるので、Gitを使用する場合は`Yes`を選択します。
+
+5.  プロジェクトの作成が完了したら、作成したプロジェクトディレクトリで`npm run dev`を実行します。
+
+    ```zsh
+    npm run dev
+    ```
+
+    表示されるURLを開き、Astroの初期ページが表示されたら完了です。
+
+</Steps>
