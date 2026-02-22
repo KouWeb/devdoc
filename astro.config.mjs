@@ -24,5 +24,5 @@ export default defineConfig({
 		}),
 	],
 	site: 'https://KouWeb.github.io',
-	base: process.env.CI ? '/devdoc' : '/',
+	base: '/devdoc'
 });
