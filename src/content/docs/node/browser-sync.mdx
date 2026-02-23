@@ -2,16 +2,16 @@
 title: ブラウザ自動更新
 description: ファイル更新を検知してブラウザを自動更新させるようにします。
 sidebar:
-    order: 99
+    order: 6
 ---
 
 import { LinkCard, LinkButton, Steps, Aside } from "@astrojs/starlight/components";
 
-ローカルサーバーを立ち上げてWebページを表示し、ブラウザを自動リロードさせます。
+Browser Syncを利用してローカルサーバーを立ち上げてWebページを表示し、ブラウザを自動リロードさせます。
 
-## Browser-Syncをインストール
+## インストール
 
-`browser-sync`をインストールします。
+ターミナルでプロジェクトフォルダを開き、以下のコマンドを実行します。
 
 ```zsh
 npm install --save-dev browser-sync
@@ -36,9 +36,9 @@ npm install --save-dev browser-sync
 },
 ```
 
-## Browser-Syncの実行
+## コマンドの実行
 
-以下のコマンドを実行すると、`watch`の`run-p`コマンドに登録されたコマンドが全て実行されます。
+以下のコマンドを実行すると、`watch`に登録されたコマンドが全て実行されます。
 
 ```zsh
 npm run watch

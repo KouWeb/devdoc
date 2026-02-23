@@ -2,59 +2,58 @@
 title: ESLintの導入
 description: Node環境にESLintを導入します。
 sidebar:
-    order: 99
+    order: 7
 ---
 
-import { LinkCard, LinkButton, Steps, Aside } from "@astrojs/starlight/components";
+import { LinkCard, LinkButton, Steps, Aside } from '@astrojs/starlight/components';
 
 ESLintは、JavaScriptやTypeScriptを解析して問題を検出し、修正するためのツールです。
 
 モダンなフロントエンド開発ではデファクトスタンダードとなっています。
 
-## ESLintのインストール
+## インストールと設定
 
-ESLintをインストールします。
+<Steps>
+    1.  ターミナルでプロジェクトフォルダを開き、以下のコマンドを実行します。
 
-```zsh
-npm install --save-dev eslint @eslint/js typescript-eslint
-```
+        ```zsh
+        npm install --save-dev eslint @eslint/js typescript-eslint
+        ```
 
-<Aside title="typescript-eslint">
-    ESLintをTypeScriptに対応させるためのプラグインです。
-</Aside>
+        <Aside title="typescript-eslint">
+            ESLintをTypeScriptに対応させるためのプラグインです。
+        </Aside>
 
-## 設定ファイルの作成
+    2.  プロジェクトルートに`eslint.config.js`を作成し、以下の設定をします。
 
-プロジェクトルートに`eslint.config.js`を作成し、以下の設定をします。
+        ```js
+        import eslint from "@eslint/js";
+        import tseslint from "typescript-eslint";
 
-```js
-import eslint from "@eslint/js";
-import tseslint from "typescript-eslint";
+        export default tseslint.config(
+            eslint.configs.recommended,
+            tseslint.configs.recommended
+        );
+        ```
 
-export default tseslint.config(
-    eslint.configs.recommended,
-    tseslint.configs.recommended
-);
-```
+    2.  `package.json`の`type`フィールドを`module`に設定をします。
 
-## typeフィールドの設定
+        ```json
+        "type": "module",
+        ```
 
-`package.json`の`type`フィールドの設定をします。
+        <Aside title='"type": "module"'>
+            Node.jsプロジェクト内の`.js`ファイルをES Modulesとして解釈させるための設定です。
 
-```json
-"type": "module",
-```
+            設定ファイル内で`import`文が使用できるようになり、よりモダンでシンプルに設定できます。
 
-<Aside title='"type": "module"'>
-    Nodeプロジェクト内の`.js`ファイルをES Modulesとして解釈させるための設定です。
+        </Aside>
 
-    設定ファイル内で`import`文が使用できるようになり、よりモダンでシンプルに設定できます。
-
-</Aside>
+</Steps>
 
 ## コマンドの登録
 
-`package.json`にコマンドの登録します。
+`package.json`にコマンドを登録します。
 
 ```json
 "scripts": {
@@ -73,14 +72,3 @@ export default tseslint.config(
 ```zsh
 npm run lint
 ```
-
-<Steps>
-    1.  ステップ1
-
-    2.  ステップ2
-
-</Steps>
-
-<Aside title="注釈の見出し">
-    注釈の内容。
-</Aside>

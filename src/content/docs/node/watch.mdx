@@ -1,15 +1,16 @@
 ---
-title: コマンドの自動化
-description: 文書ファイルのテンプレートです。
+title: コマンドの登録と自動化
+description: コマンドの登録と、ファイル監視によるコマンド自動実行を設定します。
 sidebar:
-    order: 99
+    order: 4
 ---
 
 import { LinkCard, LinkButton, Steps, Aside } from "@astrojs/starlight/components";
 
-watchモードを使用して、変換コマンドなどを自動化します。
+NPM Scriptsにコマンドを登録し、簡単に実行できるようにします。
 
-ファイルの更新を検知して、自動的にコマンドを実行します。
+また、watchモードを利用して、コマンドの実行を自動化します。  
+ファイルの更新を検知して、自動的にコマンドが実行されるようになります。
 
 ## NPM Scriptsにコマンドを登録
 
@@ -34,6 +35,8 @@ npm run watch:ts
 npm run watch:scss
 ```
 
-<Aside title="">
-    2つを同時に実行したい場合は、ターミナルを2つ開いてそれぞれで実行する必要があります。
+watchモードが起動し、対照ファイルを更新すると自動でコマンドが実行されるようになります。
+
+<Aside title="watchモードの同時実行">
+    watchモードを2つを同時に実行したい場合は、ターミナルを2つ開いてそれぞれで実行する必要があります。
 </Aside>

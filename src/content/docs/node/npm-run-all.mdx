@@ -1,19 +1,17 @@
 ---
-title: 複数のScriptを同時に実行
-description: 文書ファイルのテンプレートです。
+title: 複数のコマンドを同時に実行
+description: 複数のコマンドをまとめて同時に実行できるようにします。
 sidebar:
-    order: 99
+    order: 5
 ---
 
 import { LinkCard, LinkButton, Steps, Aside } from "@astrojs/starlight/components";
 
-複数のNPM Scriptをまとめて同時に実行できるようにします。
+`npm-run-all`を利用して、複数のNPM Scriptをまとめて同時に実行できるようにします。
 
-`npm-run-all`を利用します。
+## インストール
 
-## npm-run-allのインストール
-
-複数のScriptを同時に実行できるようにするためのツールをインストールします。
+ターミナルでプロジェクトフォルダを開き、以下のコマンドを実行します。
 
 ```zsh
 npm install --save-dev npm-run-all
