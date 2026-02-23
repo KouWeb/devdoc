@@ -21,4 +21,4 @@ pnpm-debug.log*
 .DS_Store
 
 # 開発用資材
-src/content/docs/template
+src/content/docs/_template

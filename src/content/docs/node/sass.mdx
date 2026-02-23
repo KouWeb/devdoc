@@ -1,0 +1,51 @@
+---
+title: Sass / SCSSの導入
+description: Node.jsプロジェクトにSass / SCSSを導入します。
+sidebar:
+    order: 2
+---
+
+import { LinkCard, LinkButton, Steps, Aside } from "@astrojs/starlight/components";
+
+Node.jsプロジェクトにSass / SCSSを導入し、ファイルのコンパイルを可能にします。
+
+## インストール
+
+プロジェクトにSassをインストールします。  
+ターミナルでプロジェクトフォルダを開き、以下のコマンドを実行します。
+
+```zsh
+npm install --save-dev sass
+```
+
+<Aside title="コマンドの意味">
+    `install`（省略形：`i`）は、指定したパッケージをインストールする命令です。  
+    パッケージ名を指定して実行すると、`node_modules`フォルダにパッケージがインストールされ、`package.json`に記録されます。
+
+    `--save-dev`（省略形：`-D`）はオプションで、開発用のパッケージとしてインストールするという命令です。
+    本番のデプロイには含まれなくなります。
+    フロントエンド開発では基本的に`--save-dev`でのインストールで問題ありません。
+
+</Aside>
+
+## コンパイルの実行
+
+出力パスを指定してコマンドを実行します。
+
+```zsh
+npx sass sass/scssのファイルパス 出力先のファイルパス
+```
+
+例：
+
+```zsh
+npx sass src/_scss/style.scss src/css/style.css
+```
+
+ソースマップファイルを出力したくない場合は以下のオプションを付与します。
+
+```zsh
+npx sass src/_scss/style.scss src/css/style.css --no-source-map
+```
+
+コマンドを実行すると、指定したフォルダにCSSファイルが出力されます。

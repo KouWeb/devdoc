@@ -1,0 +1,42 @@
+---
+title: Getting Started
+description: Nodeを使ってSass / SCSSをコンパイルする方法です。
+sidebar:
+    order: 1
+---
+
+import { LinkCard, LinkButton, Steps, Aside } from "@astrojs/starlight/components";
+
+
+Node環境でSass / SCSSをコンパイルします。
+
+## Sassのインストール
+
+プロジェクトにSassをインストールします。  
+以下のコマンドを実行します。
+
+```zsh
+npm install --save-dev sass
+```
+
+## コンパイルの実行
+
+変換元、出力先のパスを指定してコマンドを実行します。
+
+```zsh
+npx sass sass/scssのファイルパス 出力先のファイルパス
+```
+
+以下のようなコマンドを実行します。
+
+```zsh
+npx sass src/_scss/style.scss src/css/style.css
+```
+
+ソースマップファイルを出力したくない場合は以下のオプションを付与します。
+
+```zsh
+npx sass src/_scss/style.scss src/css/style.css --no-source-map
+```
+
+指定したフォルダにCSSファイルが出力されます。

@@ -1,0 +1,45 @@
+---
+title: ブラウザ自動更新
+description: ファイル更新を検知してブラウザを自動更新させるようにします。
+sidebar:
+    order: 99
+---
+
+import { LinkCard, LinkButton, Steps, Aside } from "@astrojs/starlight/components";
+
+ローカルサーバーを立ち上げてWebページを表示し、ブラウザを自動リロードさせます。
+
+## Browser-Syncをインストール
+
+`browser-sync`をインストールします。
+
+```zsh
+npm install --save-dev browser-sync
+```
+
+## コマンドを登録
+
+`package.json`の`scripts`にコマンドを登録します。
+
+```json
+"watch:bs": "browser-sync start --server src --files 'src/**/*'",
+```
+
+他のコマンドと同時に実行したい場合は、以下のように`run-p`コマンドに組み込みます。
+
+```json
+"scripts": {
+    "watch:ts": "tsc --watch",
+    "watch:scss": "sass src/_scss/style.scss src/css/style.css --no-source-map --watch",
+    "watch:bs": "browser-sync start --server src --files 'src/**/*'",
+    "watch": "run-p watch:ts watch:scss watch:bs"
+},
+```
+
+## Browser-Syncの実行
+
+以下のコマンドを実行すると、`watch`の`run-p`コマンドに登録されたコマンドが全て実行されます。
+
+```zsh
+npm run watch
+```

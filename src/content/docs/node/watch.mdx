@@ -1,0 +1,39 @@
+---
+title: コマンドの自動化
+description: 文書ファイルのテンプレートです。
+sidebar:
+    order: 99
+---
+
+import { LinkCard, LinkButton, Steps, Aside } from "@astrojs/starlight/components";
+
+watchモードを使用して、変換コマンドなどを自動化します。
+
+ファイルの更新を検知して、自動的にコマンドを実行します。
+
+## NPM Scriptsにコマンドを登録
+
+`package.json`の`scripts`にコマンドを登録します。
+
+```json
+"scripts": {
+    "watch:ts": "tsc --watch",
+    "watch:scss": "sass src/_scss/style.scss src/css/style.css --no-source-map --watch"
+},
+```
+
+## watchモードの起動
+
+ターミナルで以下のコマンドを実行します。
+
+```zsh
+npm run watch:ts
+```
+
+```zsh
+npm run watch:scss
+```
+
+<Aside title="">
+    2つを同時に実行したい場合は、ターミナルを2つ開いてそれぞれで実行する必要があります。
+</Aside>

@@ -32,6 +32,22 @@ export default defineConfig({
 					autogenerate: { directory: 'guides' },
 				},
 				{
+					label: 'Visual Studio Code',
+					autogenerate: { directory: 'vscode' },
+				},
+				{
+					label: 'Node.jsチュートリアル',
+					autogenerate: { directory: 'node' },
+				},
+				{
+					label: 'Sass / SCSS',
+					autogenerate: { directory: 'sass' },
+				},
+				{
+					label: 'TypeScript',
+					autogenerate: { directory: 'typescript' },
+				},
+				{
 					label: 'Astro',
 					autogenerate: { directory: 'astro' },
 				},

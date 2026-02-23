@@ -1,0 +1,73 @@
+---
+title: Prettierの導入
+description: Node.js環境にPrettierを導入してコード整形を自動化します。
+sidebar:
+    order: 99
+---
+
+import { LinkCard, LinkButton, Steps, Aside } from "@astrojs/starlight/components";
+
+Node.jsプロジェクトにPrettierを導入してコード整形を自動化します。
+
+## インストールと設定
+
+プロジェクトにPrettierをインストールし、基本設定を行います。
+
+<Steps>
+    1.  Prettierをインストールします。
+
+        ```zsh
+        npm install --save-dev prettier eslint-config-prettier
+        ```
+        <Aside title="eslint-config-prettier">
+            ESLintが持つコード整形機能のルールと競合しないようにするためのパッケージです。
+        </Aside>
+
+    2.  Prettierの設定ファイルを作成します。
+        プロジェクトルートに`.prettierrc`を作成し、以下の設定をします。
+
+        ```json
+        {
+            "semi": true,
+            "singleQuote": true,
+            "tabWidth": 2,
+            "trailingComma": "es5"
+        }
+        ```
+
+    3.  ESLintの設定にPrettierを追加します。
+        `eslint.config.js`に、以下のように追記します。
+
+        ```js
+        import eslint from "@eslint/js";
+        import tseslint from "typescript-eslint";
+        import prettier from "eslint-config-prettier";
+
+        export default tseslint.config(
+            eslint.configs.recommended,
+            tseslint.configs.recommended,
+            prettier
+        );
+        ```
+
+</Steps>
+
+## コマンドの登録
+
+`package.json`の`scripts`に以下のコマンドを登録します。
+
+```json
+"format": "prettier --write src/**/*.html src/ts/**/*.ts src/scss/**/*.scss"
+```
+
+## フォーマットの実行
+
+以下のコマンドでフォーマットを実行します。
+
+```zsh
+npm run format
+```
+
+<Aside title="注釈の見出し">
+    注釈の内容。
+</Aside>

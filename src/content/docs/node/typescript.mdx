@@ -1,0 +1,71 @@
+---
+title: TypeScriptの導入
+description: Node.jsプロジェクトにTypeScriptを導入します。
+sidebar:
+    order: 3
+---
+
+import { LinkCard, LinkButton, Steps, Aside } from "@astrojs/starlight/components";
+
+Node.jsプロジェクトにTypeScriptを導入し、ファイルのトランスパイルを可能にします。
+
+## インストールと初期設定
+
+プロジェクトにTypeScriptをインストールし、初期設定をします。
+
+<Steps>
+    1.  以下のコマンドを実行します。
+        ```zsh
+        npm install --save-dev typescript
+        ```
+
+    2.  TypeScriptの設定ファイルを生成します。  
+        以下のコマンドを実行します。
+
+        ```zsh
+        npx tsc --init
+        ```
+
+        プロジェクトルートに、`tsconfig.json`が生成されます。
+
+    3.  `tsconfig.json`の内容を編集し、以下のような設定をします。
+
+        ```json
+        {
+            "compilerOptions": {
+                "target": "ES2020",
+                "module": "ES2020",
+                "strict": true,
+                "outDir": "./src/js"
+            },
+            "include": [
+                "src/_ts/**/*"
+            ]
+        }
+        ```
+
+        <Aside title="設定内容の意味">
+            `tsconfig.json`内の設定項目の意味は以下の通りです。
+
+            -   `target`：変換後のJavaScriptのバージョン。
+            -   `module`：モジュールの形式。
+            -   `strict`：厳格な型チェックをするか。
+            -   `outDir`：コンパイル後のJavaScript出力先。
+            -   `include`：コンパイル対象のファイルの場所。
+        </Aside>
+
+</Steps>
+
+## トランスパイルの実行
+
+設定した各フォルダと、トランスパイル対象となる`.ts`ファイルが準備できたら、トランスパイルを実行します。
+
+<Steps>
+    1.  以下のコマンドを実行します。
+        ```zsh
+        npx tsc
+        ```
+
+        出力先フォルダに`.js`ファイルが生成されます。
+
+</Steps>

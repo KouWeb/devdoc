@@ -1,0 +1,44 @@
+---
+title: 複数のScriptを同時に実行
+description: 文書ファイルのテンプレートです。
+sidebar:
+    order: 99
+---
+
+import { LinkCard, LinkButton, Steps, Aside } from "@astrojs/starlight/components";
+
+複数のNPM Scriptをまとめて同時に実行できるようにします。
+
+`npm-run-all`を利用します。
+
+## npm-run-allのインストール
+
+複数のScriptを同時に実行できるようにするためのツールをインストールします。
+
+```zsh
+npm install --save-dev npm-run-all
+```
+
+## コマンドを登録
+
+`package.json`の`scripts`に以下のコマンドを登録します。
+
+```json
+"scripts": {
+    "watch:ts": "tsc --watch",
+    "watch:scss": "sass src/_scss/style.scss src/css/style.css --no-source-map --watch",
+    "watch": "run-p watch:ts watch:scss"
+},
+```
+
+<Aside title="run-pとは？">
+    `run-p`は`npm-run-all`によって使えるようになるコマンドで、「parallel（並列）」を意味し、並列でコマンドを実行することができるようになります。
+</Aside>
+
+## コマンドの実行
+
+以下のコマンドを実行すると、`watch`コマンドに登録したコマンドが全て実行されます。
+
+```zsh
+npm run watch
+```
