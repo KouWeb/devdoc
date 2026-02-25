@@ -5,7 +5,7 @@ sidebar:
     order: 1
 ---
 
-import { LinkCard, LinkButton, Steps, Aside } from "@astrojs/starlight/components";
+import { LinkCard, LinkButton, Steps, Aside } from '@astrojs/starlight/components';
 
 フレームワークなどを使わず、あえてゼロからNode.jsプロジェクトを構築することで、Node.jsへの理解を深めようという試みのドキュメントです。
 
@@ -16,7 +16,6 @@ import { LinkCard, LinkButton, Steps, Aside } from "@astrojs/starlight/component
 <Steps>
     1.  任意の場所にプロジェクト用のフォルダを作成します。  
         これがプロジェクトルートフォルダになります。
-
     2.  ターミナルでプロジェクトフォルダを開き、以下のコマンドを実行します。
         ```zsh
         npm init --yes
@@ -24,17 +23,13 @@ import { LinkCard, LinkButton, Steps, Aside } from "@astrojs/starlight/component
         <Aside title="コマンドの意味">
             `init`は、プロジェクトフォルダを初期化するという命令です。  
             これを実行すると、いくつかの質問のあと`package.json`が生成され、Node.jsのプロジェクトフォルダとして初期化されます。
-
             `--yes`（省略形：`-y`）はオプションで、質問を省略してすべてデフォルト値でプロジェクトフォルダを初期化します。
         </Aside>
-
     3. プロジェクトフォルダ内に`package.json`が生成されていれば完了です。
         <Aside title="package.jsonとは？">
             `package.json`は、プロジェクトの設定ファイルです。
-
             -   使用しているパッケージ
             -   使用できるコマンド
-
             などが記録されます。  
             機能を追加していくに伴い、このファイルが自動的に更新されたり、コマンドを登録したりします。
         </Aside>
@@ -47,7 +42,6 @@ import { LinkCard, LinkButton, Steps, Aside } from "@astrojs/starlight/component
 
 <Steps>
     1.  プロジェクトルートに`src`フォルダを作成します。
-
     2.  `src`フォルダ内に、`index.html`や、`css`、`js`など、必要なファイルやフォルダを任意で追加します。
 
 </Steps>

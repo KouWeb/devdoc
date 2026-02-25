@@ -1,0 +1,104 @@
+---
+title: ESLintの導入
+description: Node環境にESLintを導入します。
+sidebar:
+    order: 7
+---
+
+import { Aside, Badge, Steps } from '@astrojs/starlight/components';
+
+ESLintは、JavaScriptやTypeScriptを解析して問題を検出し、修正するためのツールです。
+
+モダンなフロントエンド開発ではデファクトスタンダードとなっています。
+
+## インストールと設定
+
+<Steps>
+    1.  ターミナルでプロジェクトフォルダを開き、以下のコマンドを実行します。
+        ```zsh
+        npm install --save-dev eslint @eslint/js typescript-eslint
+        ```
+        <Aside title="typescript-eslint">
+            ESLintをTypeScriptに対応させるためのプラグインです。
+        </Aside>
+    2.  `package.json`の`type`フィールドを`module`に設定します。
+        ```json
+        "type": "module",
+        ```
+        <Aside title='"type": "module"'>
+            Node.jsプロジェクト内の`.js`ファイルをES Modulesとして解釈させるための設定です。  
+            設定ファイル内で`import`文が使用できるようになり、よりモダンでシンプルに設定できます。
+        </Aside>
+    3.  プロジェクトルートに`eslint.config.js`を作成し、以下の設定をします。
+        ```js
+        import eslint from "@eslint/js";
+        import tseslint from "typescript-eslint";
+        export default tseslint.config(
+            eslint.configs.recommended,
+            tseslint.configs.recommended
+        );
+        ```
+    4.  <Badge text="任意" variant="note" size="large" /> `eslint.config.js`に、`console`関連の以下の設定を追加します。
+        ```js
+        import eslint from "@eslint/js";
+        import tseslint from "typescript-eslint";
+        import prettier from "eslint-config-prettier";
+        export default tseslint.config(
+            eslint.configs.recommended,
+            tseslint.configs.recommended,
+            {
+                languageOptions: {
+                    globals: {
+                        console: "readonly",
+                    },
+                },
+                rules: {
+                    "no-console": "warn"
+                }
+            },
+        );
+        ```
+        <Aside title='設定の意味'>
+            以下の設定は、ESLintに`console`を認識させるためのものです。  
+            `console`は、ブラウザのグローバル変数のため、Node.jsプロジェクト上のESLintでは未定義の変数としてエラー処理されます。  
+            `console.log()`などはデバッグ中によく使うので、作業中にエラー処理されないように`console`をESLintに認識させます。  
+            なお、この設定をしなくても`console.log()`などは使用できます。
+            ```js
+            languageOptions: {
+                globals: {
+                    console: "readonly",
+                },
+            }
+            ```
+            ---
+            以下の設定は`console`に警告を出すためのものです。  
+            デバッグ用に`console.log()`で出力したものをそのまま本番に公開しないように、警告として表示して公開版からは取り除くようにします。
+            ```js
+            rules: {
+                "no-console": "warn"
+            }
+            ```
+        </Aside>
+</Steps>
+
+## コマンドの登録
+
+`package.json`にコマンドを登録します。
+
+```json
+"scripts": {
+    "watch:ts": "tsc --watch",
+    "watch:scss": "sass src/scss/style.scss src/css/style.css --no-source-map --watch",
+    "watch:bs": "browser-sync start --server src --files 'src/**/*'",
+    "watch": "run-p watch:ts watch:scss watch:bs",
+    "lint": "eslint src/_ts/**/*.ts"
+},
+```
+
+## 解析の実行
+
+以下のコマンドで解析を実行します。
+
+```zsh
+npm run lint
+```

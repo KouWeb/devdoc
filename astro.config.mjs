@@ -37,7 +37,11 @@ export default defineConfig({
 				},
 				{
 					label: 'Node.jsチュートリアル',
-					autogenerate: { directory: 'node' },
+					autogenerate: { directory: 'nodejs-tutorial' },
+				},
+				{
+					label: 'Node.js',
+					autogenerate: { directory: 'nodejs' },
 				},
 				{
 					label: 'Sass / SCSS',

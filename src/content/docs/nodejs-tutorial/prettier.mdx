@@ -15,17 +15,14 @@ Node.jsプロジェクトにPrettierを導入してコード整形を自動化�
 
 <Steps>
     1.  Prettierをインストールします。
-
         ```zsh
         npm install --save-dev prettier eslint-config-prettier
         ```
         <Aside title="eslint-config-prettier">
             ESLintが持つコード整形機能のルールと競合しないようにするためのパッケージです。
         </Aside>
-
-    2.  Prettierの設定ファイルを作成します。
+    2.  Prettierの設定ファイルを作成します。  
         プロジェクトルートに`.prettierrc`を作成し、以下の設定をします。
-
         ```json
         {
             "semi": true,
@@ -34,15 +31,12 @@ Node.jsプロジェクトにPrettierを導入してコード整形を自動化�
             "trailingComma": "es5"
         }
         ```
-
-    3.  ESLintの設定にPrettierを追加します。
+    3.  ESLintの設定にPrettierを追加します。  
         `eslint.config.js`に、以下のように追記します。
-
         ```js
         import eslint from "@eslint/js";
         import tseslint from "typescript-eslint";
         import prettier from "eslint-config-prettier";
-
         export default tseslint.config(
             eslint.configs.recommended,
             tseslint.configs.recommended,
