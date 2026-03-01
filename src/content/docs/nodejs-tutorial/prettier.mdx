@@ -1,8 +1,10 @@
 ---
 title: Prettierの導入
 description: Node.js環境にPrettierを導入してコード整形を自動化します。
+draft: true
 sidebar:
     order: 8
+    hidden: true
 ---
 
 import { LinkCard, LinkButton, Steps, Aside } from '@astrojs/starlight/components';
@@ -22,12 +24,16 @@ Node.jsプロジェクトにPrettierを導入してコード整形を自動化�
             ESLintが持つコード整形機能のルールと競合しないようにするためのパッケージです。
         </Aside>
     2.  Prettierの設定ファイルを作成します。  
-        プロジェクトルートに`.prettierrc`を作成し、以下の設定をします。
+        プロジェクトルートに`.prettierrc`を作成し、以下のような設定をします。
         ```json
         {
+            "bracketSpacing": true,
+            "printWidth": 9999,
+            "proseWrap": "preserve",
             "semi": true,
             "singleQuote": true,
-            "tabWidth": 2,
+            "tabWidth": 4,
+            "useTabs": true,
             "trailingComma": "es5"
         }
         ```
@@ -37,11 +43,11 @@ Node.jsプロジェクトにPrettierを導入してコード整形を自動化�
         import eslint from "@eslint/js";
         import tseslint from "typescript-eslint";
         import prettier from "eslint-config-prettier";
-        export default tseslint.config(
+        export default [
             eslint.configs.recommended,
             tseslint.configs.recommended,
             prettier
-        );
+        ];
         ```
 
 </Steps>
@@ -62,4 +68,58 @@ Node.jsプロジェクトにPrettierを導入してコード整形を自動化�
 npm run format
 ```
 
-<Aside title="注釈の見出し">注釈の内容。</Aside>
+## Prettierの注意点
+
+### セルフクロージングタグ
+
+Prettierはセルフクロージングタグ（`<img>`、`<br>`など）の末尾に自動的に`/`を追加します。
+
+整形前： `<img src="img.png">`  
+整形後： `<img src="img.png" />`
+
+HTML Living Standardでは、上記は全く同じものと解釈されるため問題ありません。
+
+### 意図的な改行の削除
+
+Prettierは、配列や関数の引数などで可読性のために意図的な改行を入れていても、それを無視して1行にまとめます。
+
+整形前：
+
+```js
+const myArray = [
+	12,
+	34,
+	56
+];
+```
+
+整形後：
+
+```js
+const myArray = [12, 34, 56];
+```
+
+## Prettierを無効化する
+
+Prettierがインストール済みのNode.jsプロジェクト内で、Prettierを無効化したい場合は、`.prettierignore`で設定してください。
+
+以下は`src`ディレクトリ内の全てのコードに対してPrettierを無効化する例です。
+
+```
+src/*
+```
+
+配列やメソッドチェーンなど、コード内で部分的にピンポイントでPrettierを無効化したい場合は、`prettier-ignore`を使用します。
+
+```ts
+// prettier-ignore
+const myArray1 = [
+	12,
+	34,
+	56
+];
+// ↑無効化される。
+
+const myArray2 = [12, 34, 56];
+// ↑無効化されない。
+```

@@ -1,8 +1,10 @@
 ---
 title: ESLintの導入
 description: Node環境にESLintを導入します。
+draft: true
 sidebar:
     order: 7
+    hidden: true
 ---
 
 import { Aside, Badge, Steps } from '@astrojs/starlight/components';
@@ -31,32 +33,37 @@ ESLintは、JavaScriptやTypeScriptを解析して問題を検出し、修正す
         </Aside>
     3.  プロジェクトルートに`eslint.config.js`を作成し、以下の設定をします。
         ```js
-        import eslint from "@eslint/js";
-        import tseslint from "typescript-eslint";
-        export default tseslint.config(
+        import eslint from '@eslint/js';
+        import tseslint from 'typescript-eslint';
+        export default [
             eslint.configs.recommended,
-            tseslint.configs.recommended
-        );
+            ...tseslint.configs.recommended,
+        ];
         ```
     4.  <Badge text="任意" variant="note" size="large" /> `eslint.config.js`に、`console`関連の以下の設定を追加します。
         ```js
-        import eslint from "@eslint/js";
-        import tseslint from "typescript-eslint";
-        import prettier from "eslint-config-prettier";
-        export default tseslint.config(
+        import eslint from '@eslint/js';
+        import tseslint from 'typescript-eslint';
+        export default [
             eslint.configs.recommended,
-            tseslint.configs.recommended,
+            ...tseslint.configs.recommended,
             {
                 languageOptions: {
                     globals: {
-                        console: "readonly",
+                        console: 'readonly',
                     },
                 },
                 rules: {
-                    "no-console": "warn"
-                }
+                    'no-console': 'warn',
+                },
             },
-        );
+            {
+                files: ['**/*.cjs'],
+                languageOptions: {
+                    sourceType: 'commonjs',
+                },
+            },
+        ];
         ```
         <Aside title='設定の意味'>
             以下の設定は、ESLintに`console`を認識させるためのものです。  
@@ -79,6 +86,7 @@ ESLintは、JavaScriptやTypeScriptを解析して問題を検出し、修正す
             }
             ```
         </Aside>
+
 </Steps>
 
 ## コマンドの登録
@@ -86,13 +94,7 @@ ESLintは、JavaScriptやTypeScriptを解析して問題を検出し、修正す
 `package.json`にコマンドを登録します。
 
 ```json
-"scripts": {
-    "watch:ts": "tsc --watch",
-    "watch:scss": "sass src/scss/style.scss src/css/style.css --no-source-map --watch",
-    "watch:bs": "browser-sync start --server src --files 'src/**/*'",
-    "watch": "run-p watch:ts watch:scss watch:bs",
-    "lint": "eslint src/_ts/**/*.ts"
-},
+"lint": "eslint src/_ts/**/*.ts"
 ```
 
 ## 解析の実行

@@ -1,0 +1,64 @@
+---
+title: Prettierの導入
+description: BiomeでカバーしきれないファイルのフォーマットをPrettierで行います。
+sidebar:
+    order: 8
+---
+
+import { LinkCard, LinkButton, Steps, Aside } from "@astrojs/starlight/components";
+
+BiomeではSCSSファイルのフォーマットができないため、Prettierを導入してSCSSのフォーマットを行います。
+
+Biomeによるフォーマットと競合しないように、適用範囲を絞って設定します。
+
+## インストールと設定
+
+<Steps>
+    1.  Node.jsプロジェクトにBiomeをインストールします。  
+        プロジェクトルートで以下のコマンドを実行します。
+
+        ```zsh
+        npm install --save-dev prettier
+        ```
+
+    2.  プロジェクトルートに設定ファイル`.prettierrc.json`を作成し、以下の設定をします。
+
+        ```json
+        {
+            "singleQuote": false,
+            "tabWidth": 4,
+            "useTabs": true
+        }
+        ```
+
+    3.  プロジェクトルートに`.prettierignore`を作成し、無効化するファイルを設定します。
+
+        ```
+        src/ts
+        src/js
+        src/css
+        src/**/*.html
+        ```
+
+        <Aside title="無効化するファイルの設定">
+            Prittierを適用するファイルは、以下で設定するコマンド内で直接指定するため、コマンドで実行する場合は不要です。
+
+            `.prettierignore`で無効化するのは、Visual Studio Codeの拡張機能でPrettierを自動実行したときに意図しないファイルをフォーマットしてしまわないようにするためのものです。
+        </Aside>
+</Steps>
+
+## コマンドの登録
+
+`package.json`の`scripts`に以下のコマンドを登録します。
+
+```json
+"format:scss": "prettier --write src/_scss/**/*.scss"
+```
+
+## フォーマットの実行
+
+以下のコマンドを実行して、SCSSのフォーマットを実行します。
+
+```zsh
+npm run format:scss
+```

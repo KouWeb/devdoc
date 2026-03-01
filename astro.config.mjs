@@ -24,9 +24,6 @@ export default defineConfig({
 				// 	],
 				// },
 				// {
-				// 	label: 'Reference',
-				// 	autogenerate: { directory: 'reference' },
-				// },
 				{
 					label: 'プロジェクト管理',
 					autogenerate: { directory: 'guides' },
@@ -56,8 +53,9 @@ export default defineConfig({
 					autogenerate: { directory: 'astro' },
 				},
 			],
+			lastUpdated: true,
 		}),
 	],
 	site: 'https://KouWeb.github.io',
-	base: '/devdoc'
+	base: '/devdoc',
 });

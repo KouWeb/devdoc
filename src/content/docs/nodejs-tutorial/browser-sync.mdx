@@ -9,12 +9,82 @@ import { LinkCard, LinkButton, Steps, Aside } from "@astrojs/starlight/component
 
 Browser Syncを利用してローカルサーバーを立ち上げてWebページを表示し、ブラウザを自動リロードさせます。
 
-## インストール
+## インストールと初期設定
 
-ターミナルでプロジェクトフォルダを開き、以下のコマンドを実行します。
+<Steps>
+    1.  ターミナルでプロジェクトフォルダを開き、以下のコマンドを実行します。
+        ```zsh
+        npm install --save-dev browser-sync
+        ```
+    2.  以下のコマンドを実行し、設定ファイルを生成します。
+        ```zsh
+        npx browser-sync init
+        ```
+        プロジェクトルートに`bs-config.js`が生成されます。
+        <Aside title="bs-config">
+            `npx browser-sync init`を実行するとデフォルトの設定ファイルが生成されます。
 
-```zsh
-npm install --save-dev browser-sync
+            必要な設定だけして不要な項目は全て削除するか、手動で`bs-config`ファイルを作成して必要な設定だけ追加していっても問題ありません。
+        </Aside>
+    3.  `package.json`で`"type": "module"`を設定している場合は、`bs-config.js`をCommonJS形式に編集します。
+        1.  拡張子を`.cjs`に変更します。
+        2.  `bs-config.cjs`の書式を以下のように変更します。
+            変更前：
+            ```js
+            module.exports = {
+                ...
+            };
+            ```
+            変更後：
+            ```js
+            const config = {
+                ...
+            };
+            module.exports = config;
+            ```
+        3.  `eslint.config.js`がある場合は以下の設定を追加します。
+
+            ```js
+            export default [
+                eslint.configs.recommended,
+                ...tseslint.configs.recommended,
+                {
+                    files: ['**/*.cjs'],
+                    languageOptions: {
+                        sourceType: 'commonjs',
+                    },
+                },
+            ];
+            ```
+            <Aside title="CommonJS">
+                Browser Syncは、コンフィグファイルをCommonJSで期待するため、`package.json`で`"type": "module"`を設定していると、EMSとして読み込まれてしまいエラーになります。
+                上記の設定で
+                1.  拡張子を明示的にCommonJSに変更。
+                2.  ファイルの書式をCommonJSに変更。
+                3.  ESLintにCommonJSとして扱うように設定。
+
+                をして、`bs-config.cjs`が正しく読み込まれる準備をします。
+
+                `package.json`で`"type": "commonjs"`を使用している場合は、特に追加設定なく使えます。
+            </Aside>
+
+</Steps>
+
+## Browser Syncの設定
+
+`bs-config.cjs`を編集してサーバーの設定をします。  
+以下は実務で使えそうな項目です。
+
+```cjs
+files: ['src/**/*'], // 監視対象のファイル。
+server: {
+    baseDir: 'src', // サイトルートのパス。
+    routes: {
+        '/test': 'src', // サイトルートのルーティング（/test/でサイトが表示できるようになる）。
+    },
+},
+startPath: "/test/", // サーバー起動時に表示するパス。
+port: 3000,  // サーバーのポート。
 ```
 
 ## コマンドを登録
@@ -22,7 +92,7 @@ npm install --save-dev browser-sync
 `package.json`の`scripts`にコマンドを登録します。
 
 ```json
-"watch:bs": "browser-sync start --server src --files 'src/**/*'",
+"watch:bs": "browser-sync start --config bs-config.cjs",
 ```
 
 他のコマンドと同時に実行したい場合は、以下のように`run-p`コマンドに組み込みます。
@@ -31,7 +101,7 @@ npm install --save-dev browser-sync
 "scripts": {
     "watch:ts": "tsc --watch",
     "watch:scss": "sass src/_scss/style.scss src/css/style.css --no-source-map --watch",
-    "watch:bs": "browser-sync start --server src --files 'src/**/*'",
+    "watch:bs": "browser-sync start --config bs-config.cjs",
     "watch": "run-p watch:ts watch:scss watch:bs"
 },
 ```

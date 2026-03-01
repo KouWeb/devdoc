@@ -1,0 +1,76 @@
+---
+title: Biomeの導入
+description: Node.jsプロジェクトにBiomeを導入し、フォーマットとコード診断をできるようにします。
+sidebar:
+    order: 7
+---
+
+import { Icon, LinkCard, LinkButton, Steps, Aside } from "@astrojs/starlight/components";
+
+Node.jsプロジェクトにBiomeをインストールし、コードフォーマットと診断を可能にします。
+
+<LinkButton href="https://docs.astro.build/ja/" variant="secondary" target="_blank" icon="external" iconPlacement="end">Biome</LinkButton>
+
+<Aside type="caution" title="Biomeの対応フォーマット">
+    Biomeは現状HTML、SCSSに正式対応していません。
+
+    HTMLは実験的な実装はされており使用することはできるので、明示的に有効化して活用します。  
+    SCSSは未対応のため、別途Prettierを導入してフォーマットさせます。
+
+    Biomeの2026年ロードマップによると、HTML、SCSSも正式対応予定とのことです。
+</Aside>
+
+## インストールと設定
+
+<Steps>
+    1.  Node.jsプロジェクトにBiomeをインストールします。  
+        プロジェクトルートで以下のコマンドを実行します。
+
+        ```zsh
+        npm install --save-dev --save-exact @biomejs/biome
+        ```
+        
+        <Aside title="--save-exact">
+            `--save-exact`（省略形：`-E`）は、インストールするバージョンを固定するオプションです。
+        </Aside>
+
+    2.  以下のコマンドを実行し、設定ファイルを生成します。
+
+        ```zsh
+        npx biome init
+        ```
+
+        プロジェクトルートに`biome.json`が生成されます。
+        
+        <Aside title="拡張機能">
+            `biome.json`内の`"$schema"`フィールドにエラーや警告が表示されている場合は、VSCodeにBiome拡張機能がインストールされていない可能性があります。
+        </Aside>
+
+    3.  Biomeは、標準ではHTMLフォーマットが無効化されているため、`biome.json`に以下の設定を追加します。
+    
+        ```json
+        "html": {
+            "formatter": {
+                "enabled": true
+            }
+        },
+        ```
+</Steps>
+
+## コマンドの登録
+
+`package.json`の`scripts`に以下のコマンドを登録します。
+
+```json
+"lint": "biome lint src/_ts src/js",
+"format": "biome format --write src"
+```
+
+## コマンドの実行
+
+ターミナルで以下のコマンドを実行し、フォーマットや診断を実行します。
+
+```zsh
+npm run lint
+npm run format
+```

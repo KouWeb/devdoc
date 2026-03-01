@@ -1,0 +1,41 @@
+---
+title: Stylelintの導入
+description: Stylelintを導入して、CSSやSCSSの診断をできるようにします。
+sidebar:
+    order: 9
+---
+
+import { LinkCard, LinkButton, Steps, Aside } from "@astrojs/starlight/components";
+
+Node.jsプロジェクトにStylelintをインストールし、CSSとSCSSの診断を実行できるようにします。
+
+# インストールと設定
+
+<Steps>
+    1.  Node.jsプロジェクトにStylelintをインストールします。  
+        プロジェクトルートで以下のコマンドを実行します。
+
+        ```zsh
+        npm install --save-dev stylelint stylelint-config-standard-scss
+        ```
+
+        <Aside title="stylelint-config-standard-scss">
+            SCSS向けのルールセットです。
+        </Aside>
+
+    2.  プロジェクトルートに設定ファイル`.stylelintrc.json`を作成し、以下の設定をします。
+
+        ```json
+        {
+            "extends": ["stylelint-config-standard-scss"]
+        }
+        ```
+</Steps>
+
+## コマンドの登録
+
+`package.json`の`scripts`に以下のコマンドを登録します。
+
+```json
+"format:scss": "prettier --write src/_scss/**/*.scss"
+```
