@@ -1,17 +1,23 @@
 {
-  "name": "devdoc",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "@astrojs/starlight": "^0.37.6",
-    "astro": "^5.6.1",
-    "sharp": "^0.34.2"
-  }
+	"name": "devdoc",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro",
+		"lint": "biome lint src/_ts src/js",
+		"format": "biome format --write src"
+	},
+	"dependencies": {
+		"@astrojs/starlight": "^0.37.6",
+		"astro": "^5.6.1",
+		"sharp": "^0.34.2"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.4.4",
+		"markuplint": "^4.14.1"
+	}
 }

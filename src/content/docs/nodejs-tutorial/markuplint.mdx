@@ -9,11 +9,54 @@ import { LinkCard, LinkButton, Steps, Aside } from "@astrojs/starlight/component
 
 Markuplintは、HTMLのバリデートに加え、独自ルールを用いてのチェックやアクセシビリティチェックも行えるHTMLリンターです。
 
-<Steps>
-    1.  ステップ1
+## インストールと設定
 
-    2.  ステップ2
+<Steps>
+    1.  Markuplintをインストールします。
+        プロジェクトルートで以下のコマンドを実行します。
+
+        ```zsh
+        npm install --save-dev markuplint
+        ```
+
+    2.  設定ファイルを生成します。
+        プロジェクトルートで以下のコマンドを実行します。
+
+        ```zsh
+        npx markuplint --init
+        ```
+
+    3.  質問が表示されるので回答します。
+        
+        1.  Which do you use template engines?  
+            テンプレートを使用するかの質問です。スペースキーで選択できます。  
+            該当のフレームワークがなければ何も選択せずにEnterで進みます。
+        2.  Install npm dependencies?  
+            依存パッケージをインストールするかの質問です。`y`を選択します。
+        3.  Do you customize rules?  
+            ルールをカスタマイズするかの質問です。  
+            あとから設定ファイルを追加して編集できるます。`N`を選択します。
+        4.  Does it import the recommended config?  
+            推奨設定を使うかの質問です。`y`を選択します。
+
+        完了すると、`.markuplintrc`が生成されます。
 </Steps>
+
+## コマンドの登録
+
+`package.json`の`scripts`に以下のコマンドを登録します。
+
+```zsh
+"lint:html": "markuplint src/*.html"
+```
+
+## コマンドの実行
+
+ターミナルで以下のコマンドを実行します。
+
+```zsh
+npm run lint:html
+```
 
 <Aside title="注釈の見出し">
     注釈の内容。
