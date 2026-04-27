@@ -1,18 +1,19 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
-import starlight from '@astrojs/starlight';
+
+import starlight from "@astrojs/starlight";
+import { defineConfig } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'DevDoc',
+			title: "DevDoc",
 			// social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
-			defaultLocale: 'ja',
+			defaultLocale: "ja",
 			locales: {
 				root: {
-					label: '日本語',
-					lang: 'ja',
+					label: "日本語",
+					lang: "ja",
 				},
 			},
 			sidebar: [
@@ -24,38 +25,38 @@ export default defineConfig({
 				// 	],
 				// },
 				// {
+				// {
+				// 	label: 'プロジェクト管理',
+				// 	autogenerate: { directory: 'guides' },
+				// },
+				// {
+				// 	label: 'Visual Studio Code',
+				// 	autogenerate: { directory: 'vscode' },
+				// },
 				{
-					label: 'プロジェクト管理',
-					autogenerate: { directory: 'guides' },
+					label: "Node.jsチュートリアル",
+					autogenerate: { directory: "nodejs-tutorial" },
 				},
 				{
-					label: 'Visual Studio Code',
-					autogenerate: { directory: 'vscode' },
+					label: "Node.js",
+					autogenerate: { directory: "nodejs" },
 				},
 				{
-					label: 'Node.jsチュートリアル',
-					autogenerate: { directory: 'nodejs-tutorial' },
+					label: "Sass / SCSS",
+					autogenerate: { directory: "sass" },
 				},
 				{
-					label: 'Node.js',
-					autogenerate: { directory: 'nodejs' },
+					label: "TypeScript",
+					autogenerate: { directory: "typescript" },
 				},
-				{
-					label: 'Sass / SCSS',
-					autogenerate: { directory: 'sass' },
-				},
-				{
-					label: 'TypeScript',
-					autogenerate: { directory: 'typescript' },
-				},
-				{
-					label: 'Astro',
-					autogenerate: { directory: 'astro' },
-				},
+				// {
+				// 	label: 'Astro',
+				// 	autogenerate: { directory: 'astro' },
+				// },
 			],
 			lastUpdated: true,
 		}),
 	],
-	site: 'https://KouWeb.github.io',
-	base: '/devdoc',
+	site: "https://KouWeb.github.io",
+	base: "/devdoc",
 });

@@ -24,14 +24,23 @@ Node.jsプロジェクトにTypeScriptを導入し、ファイルのトランス
         npx tsc --init
         ```
         プロジェクトルートに、`tsconfig.json`が生成されます。
-    3.  `tsconfig.json`の内容を編集し、以下のような設定をします。
+    3.  `tsconfig.json`の内容を編集し、以下のような設定をします。  
+        それ以外はデフォルトのままで問題ありません。
         ```json
         {
             "compilerOptions": {
+                // File Layout
+                "outDir": "./src/js",
+
+                // Environment Settings
                 "target": "ES2020",
                 "module": "ES2020",
                 "strict": true,
-                "outDir": "./src/js"
+
+                // Other Outputs
+                "sourceMap": false,
+                "declaration": false,
+                "declarationMap": false,
             },
             "include": [
                 "src/_ts/**/*"

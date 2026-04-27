@@ -74,3 +74,23 @@ Node.jsプロジェクトにBiomeをインストールし、コードフォー�
 npm run lint
 npm run format
 ```
+
+## VSCode拡張機能
+
+VSCode拡張機能をインストールすると、コーディング中にリアルタイムに診断したり、ファイル保存時に自動フォーマットしたりできます。
+
+<LinkButton href="https://biomejs.dev/ja/reference/vscode/" variant="secondary" target="_blank" icon="external" iconPlacement="end">Biome</LinkButton>
+
+### 設定例
+
+```json
+{
+	"editor.codeActionsOnSave": {
+		"source.fixAll.biome": "explicit",
+		"source.organizeImports.biome": "explicit"
+	},
+	"editor.defaultFormatter": "biomejs.biome",
+	"editor.formatOnSave": true,
+}
+
+```
