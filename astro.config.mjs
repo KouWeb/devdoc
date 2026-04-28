@@ -24,10 +24,10 @@ export default defineConfig({
 				// 		{ label: "Example Guide", slug: "guides/example" },
 				// 	],
 				// },
-				{
-					label: "プロジェクト管理",
-					autogenerate: { directory: "guides" },
-				},
+				// {
+				// 	label: "プロジェクト管理",
+				// 	autogenerate: { directory: "guides" },
+				// },
 				{
 					label: "Visual Studio Code",
 					autogenerate: { directory: "vscode" },
@@ -48,10 +48,10 @@ export default defineConfig({
 					label: "TypeScript",
 					autogenerate: { directory: "typescript" },
 				},
-				{
-					label: "Astro",
-					autogenerate: { directory: "astro" },
-				},
+				// {
+				// 	label: "Astro",
+				// 	autogenerate: { directory: "astro" },
+				// },
 			],
 			lastUpdated: true,
 		}),
